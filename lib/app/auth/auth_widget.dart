@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_firestore/app/auth/auth_bloc.dart';
 import 'package:flutter_firestore/constant/box_decorations.dart';
 import 'package:flutter_firestore/constant/colors.dart';
-import 'package:flutter_firestore/constant/routes.dart';
+import 'package:flutter_firestore/extensions/buttons.dart';
+import 'package:flutter_firestore/extensions/inputs.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AuthWidget extends StatefulWidget {
@@ -250,6 +251,47 @@ class _AuthWidgetState extends ModularState<AuthWidget, AuthBloc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppBGColors.primary,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          horizontal: 40.0,
+          vertical: 120.0,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Sign In',
+              style: TextStyle(
+                fontSize: 30.0,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 30.0),
+            AppTextField(
+              label: 'Email',
+              icon: Icons.email,
+              keyboardType: TextInputType.emailAddress,
+              controller: controller.emailController,
+            ),
+            AppTextField(
+              label: 'Email',
+              keyboardType: TextInputType.emailAddress,
+              controller: controller.emailController,
+            ),
+            AppButton(text: 'LOG IN', onPressed: () {
+              print(controller.emailController.text);
+            },),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget _build(BuildContext context) {
+    return Scaffold(
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(
@@ -282,6 +324,7 @@ class _AuthWidgetState extends ModularState<AuthWidget, AuthBloc> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    // AppButton(text: 'test button', onPressed: () => {},)
                     Text(
                       'Sign In',
                       style: TextStyle(
